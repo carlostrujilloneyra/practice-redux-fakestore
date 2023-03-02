@@ -1,0 +1,38 @@
+
+.main-hero{
+	padding: 1.2rem 2.4rem;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	row-gap: 3.2rem;
+	justify-items: center;
+	align-items: center;
+	margin-bottom: 1.2rem !important;
+	margin-top: 2.4rem !important;
+}
+
+@media screen and (min-width: 1000px){
+	.main-hero{
+		grid-template-columns: repeat(2, 1fr);
+		column-gap: 2rem;
+		row-gap: 0;
+		padding: 1.2rem 3.2rem;
+	}
+}
+
+h1{
+	margin-bottom: 2.4rem;
+}
+
+.main-hero__container-image img{
+	width: 100%;
+	max-width: 42rem;
+	height: 34rem;
+	border-radius: 1.2rem;
+	transition: all .4s;
+}
+
+.main-hero__container-image:hover img{
+	transform: scale(1.2);
+	transition: all .4s;
+}
+

@@ -1,0 +1,29 @@
+.main-header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: .4rem 3.2rem;
+	height: 7.2rem;
+	background-color: rgba(0, 0, 0, .2);
+	z-index: 10;
+	transition: all .4s;
+}
+
+.sticky-header{
+	padding: 4.2rem 3.2rem;
+	background-color: rgba(0, 0, 0, 1);
+	transition: all .4s;
+}
+/* 
+.change-color-logo{
+	color: black !important;
+} */
+
+
+.logo:hover{
+	cursor: pointer;
+}
