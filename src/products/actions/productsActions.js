@@ -9,15 +9,15 @@ export const showListProducts = () => {
 
 		try {
 			const rpta = await fetch(url);
-      const data = await rpta.json();
+			const data = await rpta.json();
 
-      dispatch({
-        type: types.show_products,
-        payload: data,
-			});
+			setTimeout(() => {
+				dispatch({
+					type: types.show_products,
+					payload: data,
+				});
+			}, 3000);
 
-			console.log(data);
-			
 		} catch (error) {
 			dispatch({
 				type: types.show_products_error

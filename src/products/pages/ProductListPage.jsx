@@ -6,18 +6,17 @@ import './pages.css';
 
 export const ProductListPage = () => {
 	
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		return () => {
-			dispatch(showListProducts());
-		}
-	}, [])
-
-	// Obtenemos la data
-  const products = useSelector(state => state.products.products) || [];
+  useEffect(() => {
+    return () => {
+      dispatch(showListProducts());
+    }
+  }, [])
   
-  console.log(products);
+  const products = useSelector(state => state?.products?.products) || [];
+
+  console.log(products)
 
 	return (
     <>
@@ -26,12 +25,12 @@ export const ProductListPage = () => {
 
         {/* Aquí irán los productos */}
         <div className="main-container__product-list">
-          {products.length >= 1 ? (
+          {products.length === 0 ? (
+            <h2>Cargando...</h2>
+          ) : (
             products.map((product) => {
               return <ProductCard key={product.id} {...product} />;
             })
-          ) : (
-            <h2>Cargando...</h2>
           )}
         </div>
       </div>
