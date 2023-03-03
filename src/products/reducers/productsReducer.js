@@ -10,16 +10,17 @@ export const productsReducer = (state = initialState, action) => {
 
 	switch (action.type) {
 
-		case types.show_products:
+		// case types.show_products:
 
+		// return {
+		// 	...state,
+		// 	error: false
+		// }
+
+		case types.show_products_exito:
 			return {
 				...state,
 				products: action.payload
-			}
-		
-		case types.show_products_exito:
-			return {
-				...state
 			}
 		
 		case types.show_products_error:

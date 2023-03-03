@@ -1,32 +1,28 @@
 
 import { types } from "../../types/types";
+import axios from "axios";
 
 // Acción de mostrar los productos
 export const showListProducts = () => {
 
 	return async (dispatch) => {
+
 		const url = 'https://fakestoreapi.com/products?limit=12';
 
 		try {
-			const rpta = await fetch(url);
-			const data = await rpta.json();
+			const rpta = await axios.get(url);
+			const { data } = rpta;
 
-			setTimeout(() => {
-				dispatch({
-					type: types.show_products,
-					payload: data,
-				});
-			}, 3000);
+			dispatch({
+				type: types.show_products_exito,
+				payload: data,
+			});
 
 		} catch (error) {
 			dispatch({
 				type: types.show_products_error
 			})
 		}
-
-		dispatch({
-			type: types.show_products_exito
-		})
 
 	}
 }

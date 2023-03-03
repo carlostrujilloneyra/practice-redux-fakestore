@@ -1,23 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { showListProducts } from '../actions/productsActions';
 import { ProductCard } from '../components';
+import { getProductsAsync } from '../hooks/getProductsAsync';
 import './pages.css';
 
 export const ProductListPage = () => {
 	
   const dispatch = useDispatch();
+  const [dataFake, setDataFake] = useState([]);
 
   useEffect(() => {
     return () => {
       dispatch(showListProducts());
     }
   }, [])
+
+  const getProducts = async () => {
+    const productsAlternative = await getProductsAsync();
+    const { products2 } = productsAlternative;
+    setDataFake(products2);
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, [dataFake])
+
+  const products = useSelector(state => state.products.products) || dataFake;
   
-  const products = useSelector(state => state?.products?.products) || [];
-
-  console.log(products)
-
 	return (
     <>
       <div className="container-product-list container">
