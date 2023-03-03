@@ -5,7 +5,7 @@ export const Footer = () => {
 		<>
 			<footer className="main-footer container">
 				<div>
-					<p>&#x2117; Proyecto realizado. Todos los derechos reservados, 2023</p>
+					<p>&#x2117; Proyecto personal realizado. Todos los derechos reservados, 2023</p>
 				</div>
 
 				<div>
