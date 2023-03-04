@@ -10,13 +10,6 @@ export const productsReducer = (state = initialState, action) => {
 
 	switch (action.type) {
 
-		// case types.show_products:
-
-		// return {
-		// 	...state,
-		// 	error: false
-		// }
-
 		case types.show_products_exito:
 			return {
 				...state,
@@ -33,7 +26,7 @@ export const productsReducer = (state = initialState, action) => {
 			return {
 				...state,
 				products: state.products,
-				individualProduct: state.products.find(product => product.id == action.payload.id)
+				individualProduct: state.products.find(product => product.id == action.payload)
 			}
 	
 		default:

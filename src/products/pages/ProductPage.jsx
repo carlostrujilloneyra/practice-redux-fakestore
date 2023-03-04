@@ -16,15 +16,10 @@ export const ProductPage = () => {
 	}, [])
 
 	const state = useSelector(state => state.products);
+
 	const products = state?.products || [];
 
 	const productSelected = products?.find(product => product.id == productId) || {};
-
-	useEffect(() => {
-		if (Object.keys(productSelected).length >= 1) {
-			dispatch(getProductById(productSelected));
-		}
-	}, [productId])
 
 	return (
 		<>

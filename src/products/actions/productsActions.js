@@ -28,9 +28,9 @@ export const showListProducts = () => {
 }
 
 // ObtenerProductoIndividual
-export const getProductById = (product) => {
+export const getProductById = (id) => {
 	return {
 		type: types.show_one_product,
-		payload: product
+		payload: id
 	}
 }

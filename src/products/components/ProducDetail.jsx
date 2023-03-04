@@ -1,10 +1,26 @@
 import './product-card.css';
 import { FaCartPlus, FaArrowLeft, FaStarHalfAlt } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getProductById } from '../actions/productsActions';
+import { useFetchProduct } from '../hooks/useFetchProduct';
 
-export const ProductDetail = ({title, price, description, category, image, rating}) => {
+export const ProductDetail = () => {
 
+  const navigate = useNavigate();
+
+	const handleReturnHomePage = () => {
+		navigate(-1)
+	}
+  
+  const { productId } = useParams();
+
+  const { product } = useFetchProduct(productId);
+  
+  const {title, price, description, category, image, rating} = product;
+  
 	const arrayIcons = [
 		{ id: 1, value: 1 },
 		{ id: 2, value: 2 },
@@ -12,8 +28,6 @@ export const ProductDetail = ({title, price, description, category, image, ratin
 		{ id: 4, value: 4 },
 		{ id: 5, value: 5 },	
 	];
-
-  const navigate = useNavigate();
   
   const handleShowProductAdd = () => {
     Swal.fire(
@@ -27,10 +41,6 @@ export const ProductDetail = ({title, price, description, category, image, ratin
     )
   }
 
-	const handleReturnHomePage = () => {
-		navigate(-1)
-	}
-
 	return (
     <>
       <div className="container-back-button container">
@@ -40,36 +50,46 @@ export const ProductDetail = ({title, price, description, category, image, ratin
         </button>
       </div>
 
-      <div className="container-product-detail container">
-        <div className="container-product-detail__image">
-          <img src={image} alt={title} />
-        </div>
+      {Object.keys(product) == 0 ? (
+        <h2
+          style={{
+            margin: 24,
+            textAlign: "center",
+          }}
+        >
+          Cargando Producto...
+        </h2>
+      ) : (
+        <div className="container-product-detail container">
+          <div className="container-product-detail__image">
+            <img src={image} alt={title} />
+          </div>
 
-        <div className="container-product-detail__info">
-          <h1>{title}</h1>
-          <p className="category">Category: {category}</p>
-          <h4>
-            Rating: {rating?.rate}
-							<div style={{ marginLeft: 8 }}>
-								{
-									arrayIcons.map(icon => {
-										return (<FaStarHalfAlt style={{marginRight: 4}} key={icon.id}/>);
-									})
-								}
+          <div className="container-product-detail__info">
+            <h1>{title}</h1>
+            <p className="category">Category: {category}</p>
+            <h4>
+              Rating: {rating?.rate}
+              <div style={{ marginLeft: 8 }}>
+                {arrayIcons.map((icon) => {
+                  return (
+                    <FaStarHalfAlt style={{ marginRight: 4 }} key={icon.id} />
+                  );
+                })}
               </div>
-      
-          </h4>
-          <h3>US$ {price}</h3>
-          <p>{description}</p>
-          <button
-            className="add-shopping-cart"
-            onClick={handleShowProductAdd}
-          >
-            <FaCartPlus size="1.7rem" />
-            Agregar al carrito
-          </button>
+            </h4>
+            <h3>US$ {price}</h3>
+            <p>{description}</p>
+            <button
+              className="add-shopping-cart"
+              onClick={handleShowProductAdd}
+            >
+              <FaCartPlus size="1.7rem" />
+              Agregar al carrito
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
